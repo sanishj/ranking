@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Ranking</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 </head>
 <body>
 	<h1>Newsbusters</h1>
 
-
+   
 
 
 
@@ -16,6 +17,31 @@
 
 
 	<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAfPrXNiyLnAF9X7NscB0kXXAwyz4evTB4",
+    authDomain: "newsbusters-14959.firebaseapp.com",
+    databaseURL: "https://newsbusters-14959.firebaseio.com",
+    projectId: "newsbusters-14959",
+    storageBucket: "newsbusters-14959.appspot.com",
+    messagingSenderId: "801909748364"
+  };
+
+  firebase.initializeApp(config);
+
+    var database=firebase.database();
+
+    var analizedWord= "";
+    var positivityScore="";
+
+    var word={
+      value:"Clinton",
+      score:50
+    }
+
+database.ref().push(word);
+
+    // Attaching APIs
 
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC&limit=10";
 
