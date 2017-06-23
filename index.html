@@ -7,7 +7,6 @@
 </head>
 <body>
 	<h1>Newsbusters</h1>
-	
 
 
 
@@ -15,6 +14,22 @@
 
 
 
-	<script></script>
+
+	<script>
+
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC&limit=10";
+
+     // Performing our AJAX GET request
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After the data comes back from the API
+        .done(function(response) {
+          console.log(response);
+    });
+
+  </script>
+
 </body>
 </html>
