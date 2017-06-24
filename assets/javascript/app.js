@@ -23,19 +23,7 @@ $(document).ready(function() {
 
     // database.ref().push(word);
 
-    // Attaching APIs
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC&limit=10";
-
-    // Performing our AJAX GET request
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        // After the data comes back from the API
-        .done(function(response) {
-            console.log(response);
-        });
 
     //split string into array of words dropping punctuation
     var sentence = "The quick; brown, brown fox jumped. over the lazy dog"
@@ -48,20 +36,62 @@ $(document).ready(function() {
     var wordFrequency = _.countBy(arrayOfWords);
     console.log(wordFrequency);
 
+    var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 
-    // Built by LucyBot. www.lucybot.com
-    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    url += '?' + $.param({
-        'api-key': "b9f91d369ff59547cd47b931d8cbc56b:0:74623931",
-        'begin_date': "20170101",
-        'end_date': "20170102"
-    });
-    $.ajax({
-        url: url,
-        method: 'GET',
-    }).done(function(result) {
-        console.log(result);
-    }).fail(function(err) {
-        throw err;
-    });
+    // These variables will hold the results we get from the user's inputs via HTML
+    var searchTerm = "";
+    var numResults = 0;
+    var startYear = 0;
+    var endYear = 0;
+
+    // queryURLBase is the start of our API endpoint. The searchTerm will be appended to this when
+    // the user hits the search button
+    var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+        authKey + "&q=";
+
+    // Counter to keep track of article numbers as they come in
+    var articleCounter = 0;
+
+    // FUNCTIONS
+    // ==========================================================
+
+    // This runQuery function expects two parameters:
+    // (the number of articles to show and the final URL to download data from)
+    function runQuery(numArticles, queryURL) {
+
+        // The AJAX function uses the queryURL and GETS the JSON data associated with it.
+        // The data then gets stored in the variable called: "NYTData"
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function(NYTData) {
+
+            // Logging the URL so we have access to it for troubleshooting
+            console.log("------------------------------------");
+            console.log("URL: " + queryURL);
+            console.log("------------------------------------");
+
+            // Log the NYTData to console, where it will show up as an object
+            console.log(NYTData);
+            console.log("------------------------------------");
+
+
+            // Built by LucyBot. www.lucybot.com
+            /*var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+            url += '?' + $.param({
+                'api-key': "b9f91d369ff59547cd47b931d8cbc56b:0:74623931",
+                'begin_date': "20170101",
+                'end_date': "20170102"
+            });
+            $.ajax({
+                url: url,
+                method: 'GET',
+            }).done(function(result) {
+                console.log(result);
+            }).fail(function(err) {
+                throw err;
+            });*/
+        });
+    };
 });
