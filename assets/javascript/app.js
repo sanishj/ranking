@@ -94,4 +94,7 @@ $(document).ready(function() {
             });*/
         });
     };
+    var finalURL = queryURL + 'trump';
+    var nytResults = runQuery(1, finalURL);
+    console.log("NYT Call Results: " + nytResults);
 });
