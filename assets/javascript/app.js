@@ -38,11 +38,15 @@ $(document).ready(function() {
         });
 
     //split string into array of words dropping punctuation
-    var sentence = "The quick; brown, fox jumped. over the lazy dog"
+    var sentence = "The quick; brown, brown fox jumped. over the lazy dog"
     var arrayOfWords = sentence.split(/\W+/);
 
     console.log('The original string is: "' + sentence + '"');
     console.log(arrayOfWords);
+
+    //create an object that counts the words in an array of words 
+    var wordFrequency = _.countBy(arrayOfWords);
+    console.log(wordFrequency);
 
 
     // Built by LucyBot. www.lucybot.com
