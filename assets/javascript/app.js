@@ -26,10 +26,15 @@ $(document).ready(function() {
 
 
     //split string into array of words dropping punctuation
-    var sentence = "The quick; brown, brown fox jumped. over the lazy dog"
-    var arrayOfWords = sentence.split(/\W+/);
+    var textBlock = "The quick; brown, brown fox jumped. over the lazy dog"
+    var arrayOfWords = textBlock.split(/\W+/);
 
-    console.log('The original string is: "' + sentence + '"');
+    // convert the array of words to lower case
+    for (var i = 0; i < arrayOfWords.length; i++) {
+        arrayOfWords[i] = arrayOfWords[i].toLowerCase();
+    }
+
+    console.log('The original string is: "' + textBlock + '"');
     console.log(arrayOfWords);
 
     //create an object that counts the words in an array of words 
@@ -97,4 +102,21 @@ $(document).ready(function() {
     var finalURL = queryURL + 'trump';
     var nytResults = runQuery(1, finalURL);
     console.log("NYT Call Results: " + nytResults);
+
+    // Built by LucyBot. www.lucybot.com
+    /*var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    url += '?' + $.param({
+        'api-key': "b9f91d369ff59547cd47b931d8cbc56b:0:74623931",
+        'begin_date': "20170101",
+        'end_date': "20170102"
+    });
+    $.ajax({
+        url: url,
+        method: 'GET',
+    }).done(function(result) {
+        console.log(result);
+    }).fail(function(err) {
+        throw err;
+    });*/
+
 });
