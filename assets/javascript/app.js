@@ -122,25 +122,27 @@ $(document).ready(function() {
                 console.log(NYTData.response.docs[i].web_url);
             }
 
-            /*obtain count of each word in lead paragraph
-              Note: opening loop not yet working--it's only returning the word count
-              for the first article returned*/
+            /*For each article returned, report the frequency of words in the lead paragraph*/
             for (var i = 0; i < numArticles; i++) {
-                //split string into array of words dropping punctuation
-                var textBlock = NYTData.response.docs[i].lead_paragraph;
-                var arrayOfWords = textBlock.split(/\W+/);
+                if (NYTData.response.docs[i].lead_paragraph !== null) {
+                    //split string into array of words dropping punctuation
+                    var textBlock = NYTData.response.docs[i].lead_paragraph;
+                    var arrayOfWords = textBlock.split(/\W+/);
 
-                // convert the array of words to lower case
-                for (var i = 0; i < arrayOfWords.length; i++) {
-                    arrayOfWords[i] = arrayOfWords[i].toLowerCase();
+                    // convert the array of words to lower case
+                    for (var a = 0; a < arrayOfWords.length; a++) {
+                        arrayOfWords[a] = arrayOfWords[a].toLowerCase();
+                    }
+
+                    console.log('The original string is: "' + textBlock + '"');
+                    console.log(arrayOfWords);
+
+                    //create an object that counts the words in an array of words 
+                    var wordFrequency = _.countBy(arrayOfWords);
+                    console.log(wordFrequency);
+                } else {
+                    console.log('The lead paragraph is ' + NYTData.response.docs[i].lead_paragraph);
                 }
-
-                console.log('The original string is: "' + textBlock + '"');
-                console.log(arrayOfWords);
-
-                //create an object that counts the words in an array of words 
-                var wordFrequency = _.countBy(arrayOfWords);
-                console.log(wordFrequency);
             }
 
         });
